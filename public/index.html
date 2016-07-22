@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="myApp">
 <head>
   <title>FULLSTANGULAR2</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -8,11 +8,30 @@
   <div class="jumbotron">
     <h1>FULLSTANGULAR2</h1>
   </div>
-  <input ng-model="test">
-  {{test}}
+
+  <div class="container" ng-controller="AppCtrl">
+    <h1>FULLSTANGULAR2</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>name</th>
+          <th>email</th>
+          <th>number</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="contact in contactlist">
+          <td>{{contact.name}}</td>
+          <td>{{contact.email}}</td>
+          <td>{{contact.number}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+  <script src="controllers/controller.js"></script>
 </body>
 </html>
 
-<!-- left off at 14:32 of YouTube Video MEANSTACK RESTFUL API TUTORIAL (1/5) from Learn Coding Tutorials -->
+<!-- left off at 4:59 of YouTube Video MEANSTACK RESTFUL API TUTORIAL (2/5) from Learn Coding Tutorials , it won't display the data from controller.js for some reason-->
