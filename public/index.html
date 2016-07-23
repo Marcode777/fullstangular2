@@ -17,9 +17,16 @@
           <th>name</th>
           <th>email</th>
           <th>number</th>
+          <th>action</th>
         </tr>
       </thead>
       <tbody>
+        <tr>
+          <td><input class="form-control" ng-model="contact.name"></td>
+          <td><input class="form-control" ng-model="contact.email"></td>
+          <td><input class="form-control" ng-model="contact.number"></td>
+          <td> <button class="btn btn-primary" ng-click="addContact()">add contact</button></td>
+        </tr>
         <tr ng-repeat="contact in contactlist"> 
           <td>{{contact.name}}</td>
           <td>{{contact.email}}</td>
@@ -34,10 +41,13 @@
 </body>
 </html>
 
-<!-- left off at 4:59 of YouTube Video MEANSTACK RESTFUL API TUTORIAL (2/5) from Learn Coding Tutorials , it won't display the data from controller.js for some reason. Update! It was because contactlist was misspelled as contaclist, instead of contactlist = ) -->
+<!-- left off at 14:16 with a slight issue of YouTube Video MEANSTACK RESTFUL API TUTORIAL (4/5) from Learn Coding Tutorials, now we've practiced getting data from both controller and server, it's now time to get data from an actual database) -->
 <!-- ng-app = "myApp" initiates angular. 
 to test if controller.js is working, console.log a message and look for it in inspect under the console tab
-ng-controller = "AppCtrl" is for the controller.js (server)
+ng-controller = "AppCtrl" is for the controller.js (works with the server)
 contactlist is declared in controller.js and contains an array
 ng-repeat = "contact in contactlist", allows to loop through array, and also allows the objects into separate rows, contacts in contactlist (in other methods from others is in the form of plural in singular (contacts in contactlist), but here it's contact in contactlist, and also as long as they're the same in ng-repeat and in the td). In other words, whatever first word is used in the phrase " _____ in contactlist" will work as long as it's the same as in front of name, email, and number, e.g.  _____.name, ____.email, _____.number.
+ now we're preparing our index.html layout to be able to post data to the contaclist so we can put new data to the contactlist
+ we do this by adding input boxes for each category and also adding a contact button via adding a new tr with tds with an input class of "form-control" and ng-model of "contact.name", etc.
+ now we also add a button with ng-click="addContact()" which means it will call the addContact function when it's clicked
 -->
