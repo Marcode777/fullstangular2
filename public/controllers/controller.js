@@ -19,7 +19,6 @@ function($scope, $http){
   };
 
   var contactlist = [person1, person2, person3];
-  $scope.contaclist = contactlist;
+  $scope.contactlist = contactlist;
 
 }]);
-
