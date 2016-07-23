@@ -19,6 +19,6 @@ function($scope, $http){
   };
 
   var contactlist = [person1, person2, person3];
-  $scope.contactlist = contactlist;
+  $scope.contactlist = contactlist; //$scope is the glue between application controller and the view
 
 }]);
