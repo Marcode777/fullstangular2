@@ -18,6 +18,7 @@
           <th>email</th>
           <th>number</th>
           <th>action</th>
+          <th>&nbsp;</th>
         </tr>
       </thead>
       <tbody>
@@ -26,12 +27,14 @@
           <td><input class="form-control" ng-model="contact.email"></td>
           <td><input class="form-control" ng-model="contact.number"></td>
           <td> <button class="btn btn-primary" ng-click="addContact()">add contact</button></td>
+          <td><button class="btn btn-info" ng-click="update()">update</button>&nbsp;&nbsp;<button class="btn btn-info" ng-click="deselect()">clear</button></td>
         </tr>
         <tr ng-repeat="contact in contactlist"> 
           <td>{{contact.name}}</td>
           <td>{{contact.email}}</td>
           <td>{{contact.number}}</td>
           <td><button class="btn btn-danger" ng-click="remove(contact._id)">remove</button></td>
+          <td><button class="btn btn-warning" ng-click="edit(contact._id)">edit</button></td>
         </tr>
       </tbody>
     </table>
@@ -52,4 +55,7 @@ ng-repeat = "contact in contactlist", allows to loop through array, and also all
  we do this by adding input boxes for each category and also adding a contact button via adding a new tr with tds with an input class of "form-control" and ng-model of "contact.name", etc.
  now we also add a button with ng-click="addContact()" which means it will call the addContact function when it's clicked
  to be able to remove data, we'll add a remove button with ng-click="remove(contact._id)"
- -->
+ now to be able to edit, edit buttons are added with ng-click="edit(._contactid)", similar to the delete button
+ now to add an update button next to the addContact button. also a th is added with a blank space, just to keep the formatting look correct
+ finally, to fix a glitch, (when clicking on edit and change the information for a contact, and then click on add contact, the contact will be added, but if we click on edit for that contact, it will edit the previous contact again) so we'll be adding a clear button next to the update button, that has the ng-click="deselect()" function that will clear the input boxes before we add a contact. There should not be many glitches now, as long as the add contact button is not clicked before the clear button, this app is completely functional.
+ NOW FULLSTANGULAR2 IS COMPLETE. -->

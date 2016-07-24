@@ -54,6 +54,27 @@ app.delete('/contactlist/:id', function(req, res){
     })
 })
 
+app.get('/contactlist/:id', function(req, res){
+    var id = req.params.id;
+    console.log(id);
+    db.contactlist.findOne({_id: mongojs.ObjectId(id)}, function(err, doc){
+        res.json(doc);
+    });
+});
+
+app.put('/contactlist/:id', function(req, res){
+    var id = req.params.id;
+    console.log(req.body.name);
+    db.contactlist.findAndModify({query: {_id: mongojs.ObjectId(id)}, //changed from outer () to outer {}
+        update: {$set: {name: req.body.name, email: req.body.email, number: req.body.number}}, // changed inner () to {}
+        new: true}, function (err, doc) {
+            res.json(doc);
+        });
+
+});
+
+
+
 app.listen(3000);
 console.log("server running on PORT 3000!")
 
@@ -79,5 +100,11 @@ console.log("server running on PORT 3000!")
 // after the function (req, res) or in other words, function request, response, a var id = req.params.id, is made, in other words, var id =  request.params.id, which will basically get the value of the id from the url
 // console.log(id) will print the id to the console in command prompt
 // now to delete the contact from the mongodb database, db.contactlist.remove({_id: mongojs.ObjectId(id)}, function(err, doc){ res.json(doc); }), .__id: chooses the id, the (id) in mongojs.ObjectId(id) refers to the var id, so that will choose which contact we want to remove, function(err, doc) refers to the item we're removing, and res.json(doc) will send back the item we're removing back to the controller
-//  
+//  app.get, etc... responds to the get request from the controller for $http.get request with the edit function
+// db.contactlist.findOne({_id: mongojs.ObjectId(id)}, function(err, doc){ res.json(doc); }) etc.. is similar to db.contactlist.insert, but it's db.contactlist.findOne() because of mongodb syntax and documentation, so this allows the specific data to be found, the data which the user inputs into the mongodb database and also sends the data from the database back to the controller.js, so it can be edited
+// app.put, etc... instead of printing id to the console, we're doing console.log(req.body.name), to print the actual name to the console just to do something different while making sure that it's working
+// db.contactlist.findAndModify() etc... is now to officially update and modify the contact
+// within that, { query: (_id: mongojs.ObjectId(id))}, selects the contact that we want to modify
+// within that is a lengthy set of lines of code that I think are from the mongodb syntax documents
+// figured out the issue as to why there was an unexpected syntax error, on query line, changed from outer () to outer {}, and on update line, changed inner () to {}, which solved it!
 //
