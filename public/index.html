@@ -31,6 +31,7 @@
           <td>{{contact.name}}</td>
           <td>{{contact.email}}</td>
           <td>{{contact.number}}</td>
+          <td><button class="btn btn-danger" ng-click="remove(contact._id)">remove</button></td>
         </tr>
       </tbody>
     </table>
@@ -50,4 +51,5 @@ ng-repeat = "contact in contactlist", allows to loop through array, and also all
  now we're preparing our index.html layout to be able to post data to the contaclist so we can put new data to the contactlist
  we do this by adding input boxes for each category and also adding a contact button via adding a new tr with tds with an input class of "form-control" and ng-model of "contact.name", etc.
  now we also add a button with ng-click="addContact()" which means it will call the addContact function when it's clicked
--->
+ to be able to remove data, we'll add a remove button with ng-click="remove(contact._id)"
+ -->

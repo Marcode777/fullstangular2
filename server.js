@@ -46,6 +46,14 @@ app.post('/contactlist', function(req, res){
     })
 })
 
+app.delete('/contactlist/:id', function(req, res){
+    var id = req.params.id;
+    console.log(id);
+    db.contactlist.remove({_id: mongojs.ObjectId(id)}, function(err, doc){
+        res.json(doc);
+    })
+})
+
 app.listen(3000);
 console.log("server running on PORT 3000!")
 
@@ -67,5 +75,9 @@ console.log("server running on PORT 3000!")
 // then type in app.use(bodyParser.json()) so now the server can parse the body of the input that it receives, which in this case is json
 // so now the input can both appear in the console.log of the inspector on the browser and also on the console.log of the terminal
 //  db.contactlist.insert(req.body, function(err, doc){ res.json(doc); }) now allows data to be able to insert the input data that the user inputs into the mongodb database and also sends the new data from the database back to the controller.js
-//
+// app.delete('/contactlist/:id'), the way that we choose a contactlist contact to delete from this url is :id, within the same quotation marks, and to let it know that it's not part of the string, the colon : is used
+// after the function (req, res) or in other words, function request, response, a var id = req.params.id, is made, in other words, var id =  request.params.id, which will basically get the value of the id from the url
+// console.log(id) will print the id to the console in command prompt
+// now to delete the contact from the mongodb database, db.contactlist.remove({_id: mongojs.ObjectId(id)}, function(err, doc){ res.json(doc); }), .__id: chooses the id, the (id) in mongojs.ObjectId(id) refers to the var id, so that will choose which contact we want to remove, function(err, doc) refers to the item we're removing, and res.json(doc) will send back the item we're removing back to the controller
+//  
 //
