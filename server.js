@@ -5,6 +5,7 @@ var db = mongojs('contactlist', ['contactlist']);
 var bodyParser = require('body-parser');
 
 app.use(express.static(__dirname + "/public"));
+app.use(bodyParser.urlencoded({extended:true})); //this is a new addition
 app.use(bodyParser.json());
 
 app.get('/contactlist', function(req, res){

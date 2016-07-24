@@ -30,8 +30,9 @@ function($scope, $http){
 
     $scope.addContact = function(){
       console.log($scope.contact);
-      $http.post('/contactlist', $scope.contact)
-      console.log("also still works here")
+      $http.post('/contactlist', $scope.contact).success(function(response){
+        console.log(response);
+      })
     };
 
 
@@ -53,5 +54,8 @@ function($scope, $http){
 //  $scope.addContact = function() is going to send the information from the input boxes in index.html to the console, whatever was typed in the input boxes in html and after clicking the add contact button was console.logged into the inspect, so it was successful!
 //now $http.post('/contactlist', $scope.contact) will send the input data from our boxes to the server and make sure that it's received correctly $scope.contact is the actual data that we're sending to the server
 // the .success, etc. after $http.post, tests to makes sure that the controller receives the new data from the database 
-//
+// finally solved and functional, it was because of a syntax error and now it's fixed:  $http.post('/contactlist', $scope.contact).success(function(response){ console.log(response); })
+// since the syntax error was finally solved, after clicking on the add contact button, now we see that we have received the data from the server and there is an additional id tag that mongodb has attached to the object (when viewed in inspector), which means we have successfully inserted the data into our mongodb database
+// now, even though the data is entered into the database, the view is not being updated unless we refresh it, so now the next step is to have the page automatically refresh when addContact() is clicked
+// to do this, a new function called refresh is created, which, when called, will perform a new get request for all of our contactlist data in our mongodb database
 //
