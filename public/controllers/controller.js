@@ -48,6 +48,25 @@ function($scope, $http){
       });
     };
 
+    $scope.edit = function(id){
+      console.log(id);
+      $http.get('/contactlist/' + id).success(function(response){
+        $scope.contact = response;
+      });
+    };
+
+    $scope.update = function() {
+      console.log($scope.contact._id);
+      $http.put('/contactlist/' + $scope.contact._id, $scope.contact).success(function(response){
+        refresh();
+      })
+    };
+
+    $scope.deselect = function() {
+      $scope.contact = "";
+    }
+
+
 }]);
 
 
@@ -75,5 +94,10 @@ function($scope, $http){
 // $scope.remove, etc., is remove function which has the id of the contact we want to remove, this will sent to the console, the id of the contact we want to remove
 // now to send the $http.delete request and test to make sure that it's received. the '/contactlist/' is going to be a specific url, and the specific contact we want to delete, which is what the + id is for, because we want to be abel to send the url of the id we want to delete
 // .success after $http.delete, etc, is to immediately refresh the browser page after the remove button is clicked, so after a remove button next to an entry is clicked, it also disappears from the view, so our code is working and have successfully enabled deleting contacts from our contact list
-//
-//
+//  $scope.edit = function(id) etc... this edit function defines the edit function which will then select the contact that we want to edit and put it into the input boxes at the top of the view, the '/contactlist/' + id, will be the url of the specific contact that we want to edit
+// .success after $http.get will be the response that we receive, and the response will be by putting the response into the input appropriate boxes that have the contact ng-model, in the view 
+// $scope.update etc... is to define the update function in our controller, to be able to update the contact information for the contact we've selected that got put into the input boxes in the view 
+// within that, the console.log($scope.contact._id); will put the id of the contact in the input boxes into our console
+// within that, the $http.put('/contactlist/' + $scope.contact._id) is a put request to send the data to the server to be updated, '/contactlist/' + $scope.contact._id is the url of the contact in the box, $scope.contact is everything in the boxes in the view with the label of contact, e.g., contact.name, contact.email, contact.number, will be sent to the server
+// within that, to tell the update function to refresh the page after the update button is clicked, we add .success(function(response){ refresh(); }) 
+// $scope.deselect etc... is finally the function for the clear button that will clear the input boxes in the view before we add a contact 
