@@ -23,19 +23,30 @@ function($scope, $http){
   // var contactlist = [person1, person2, person3];
   // $scope.contactlist = contactlist; //$scope is the glue between application controller and the view
 
-    $http.get('/contactlist').success(function(response){
-      console.log("I got the data I requested in json");
-    $scope.contactlist = response;
-  });
+    var refresh = function() {
+        $http.get('/contactlist').success(function(response){
+          console.log("I got the data I requested in json");
+        $scope.contactlist = response;
+        $scope.contact = "";
+      });
+    }
+
+    refresh();
 
     $scope.addContact = function(){
       console.log($scope.contact);
       $http.post('/contactlist', $scope.contact).success(function(response){
         console.log(response);
+        refresh();
       })
     };
 
-
+    $scope.remove = function(id){
+      console.log(id);
+      $http.delete('/contactlist/' + id).success(function(response){
+          refresh();
+      });
+    };
 
 }]);
 
@@ -58,4 +69,11 @@ function($scope, $http){
 // since the syntax error was finally solved, after clicking on the add contact button, now we see that we have received the data from the server and there is an additional id tag that mongodb has attached to the object (when viewed in inspector), which means we have successfully inserted the data into our mongodb database
 // now, even though the data is entered into the database, the view is not being updated unless we refresh it, so now the next step is to have the page automatically refresh when addContact() is clicked
 // to do this, a new function called refresh is created, which, when called, will perform a new get request for all of our contactlist data in our mongodb database
+// to do this, we will surround the $http.get request, with this refresh function var = refresh function() etc., and also add $scope.contact = ""; which will clear the infoboxes after the refresh function is called
+// then the refresh ();  function is called again so that it will get the data right when we load the page
+// also the refresh(); is called yet again at the end of the addContact function to immediately refresh the page after the addContact function is called when the addContact button is clicked
+// $scope.remove, etc., is remove function which has the id of the contact we want to remove, this will sent to the console, the id of the contact we want to remove
+// now to send the $http.delete request and test to make sure that it's received. the '/contactlist/' is going to be a specific url, and the specific contact we want to delete, which is what the + id is for, because we want to be abel to send the url of the id we want to delete
+// .success after $http.delete, etc, is to immediately refresh the browser page after the remove button is clicked, so after a remove button next to an entry is clicked, it also disappears from the view, so our code is working and have successfully enabled deleting contacts from our contact list
+//
 //
