@@ -78,6 +78,7 @@ app.put('/contactlist/:id', function(req, res){
 app.listen(3000);
 console.log("server running on PORT 3000!")
 
+//expressjs helps organize the web app into an mvc structure on the server side, it basically helps manage everything from routes to handling requests and views, then a database such as mongodb, etc. can then be used provide a backend for this nodejs application
 // req, res is request, response
 //console.log("I received a get request") tells the server to listen for a get request through the created contactlist route, and when it receives a get request, it will print "I received a get request" to the command prompt (in the teminal, not the console in inspect)
 // res.json(contactlist) is going to respond to the get request by sending back the contactlist data in json format, which the controller can then use
