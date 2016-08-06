@@ -53,6 +53,7 @@ contactlist is declared in controller.js and contains an array
 ng-repeat = "contact in contactlist", allows to loop through array, and also allows the objects into separate rows, contacts in contactlist (in other methods from others is in the form of plural in singular (contacts in contactlist), but here it's contact in contactlist, and also as long as they're the same in ng-repeat and in the td). In other words, whatever first word is used in the phrase " _____ in contactlist" will work as long as it's the same as in front of name, email, and number, e.g.  _____.name, ____.email, _____.number.
  now we're preparing our index.html layout to be able to post data to the contaclist so we can put new data to the contactlist
  we do this by adding input boxes for each category and also adding a contact button via adding a new tr with tds with an input class of "form-control" and ng-model of "contact.name", etc.
+ The ng-model binds an input, select, text area or custom form control to a property on the scope using NgModelController, which is created and exposed by this directive.
  now we also add a button with ng-click="addContact()" which means it will call the addContact function when it's clicked
  to be able to remove data, we'll add a remove button with ng-click="remove(contact._id)"
  now to be able to edit, edit buttons are added with ng-click="edit(._contactid)", similar to the delete button
